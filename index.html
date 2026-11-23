@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Produk Pertanian</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #202820; background: #fff; font: 16px/1.5 Arial, sans-serif; }
+    main { max-width: 960px; margin: auto; padding: 24px 16px; }
+    h1 { font-size: 26px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    form { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+    label { display: block; margin-bottom: 4px; }
+    select, button { min-height: 44px; max-width: 100%; padding: 8px 12px; font: inherit; }
+    select, button, summary { cursor: pointer; }
+    button { border: 1px solid #245b32; background: #245b32; color: white; }
+    button:hover { background: #194526; }
+    button:active { background: #12351c; }
+    button:disabled { background: #526753; cursor: wait; }
+    :focus-visible { outline: 3px solid #165eab; outline-offset: 3px; }
+    .tabel { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #bec8be; padding: 8px; text-align: left; }
+    th { background: #edf3ed; }
+    td:nth-child(4), td:nth-child(5) { text-align: right; white-space: nowrap; }
+    #status[data-error="true"] { color: #a11b1b; }
+    summary { padding: 8px 0; }
+    @media (max-width: 540px) {
+      form > div, select, button { width: 100%; }
+      th, td { padding: 6px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Sorting Produk Pertanian</h1>
+    <p>Kelompok 7 | Fungsi Rekursif dan Sorting</p>
+    <form id="form-sorting">
+      <div>
+        <label for="metode">Metode sorting</label>
+        <select id="metode" name="metode">
+          <option value="rekursif">Recursive Insertion Sort</option>
+          <option value="sorted">sorted</option>
+          <option value="sortBy">sortBy</option>
+          <option value="sortWith">sortWith</option>
+        </select>
+      </div>
+      <div>
+        <label for="urutan">Urutan harga</label>
+        <select id="urutan" name="urutan">
+          <option value="asc">Ascending (termurah ke termahal)</option>
+          <option value="desc">Descending (termahal ke termurah)</option>
+        </select>
+      </div>
+      <button id="tombol" type="submit">Urutkan</button>
+    </form>
+    <p id="status" role="status" aria-live="polite">Memuat data...</p>
+
+    <h2>Data awal</h2>
+    <div class="tabel" role="region" aria-label="Tabel data awal" tabindex="0">
+      <table aria-label="Data produk sebelum diurutkan">
+        <thead><tr><th scope="col">No.</th><th scope="col">Nama produk</th><th scope="col">Kategori</th><th scope="col">Harga (Rp)</th><th scope="col">Stok</th></tr></thead>
+        <tbody id="data-awal"><tr><td colspan="5">Memuat data...</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>Hasil pengurutan</h2>
+    <p id="pilihan-hasil"></p>
+    <div class="tabel" role="region" aria-label="Tabel hasil pengurutan" tabindex="0">
+      <table aria-label="Data produk setelah diurutkan">
+        <thead><tr><th scope="col">No.</th><th scope="col">Nama produk</th><th scope="col">Kategori</th><th scope="col">Harga (Rp)</th><th scope="col">Stok</th></tr></thead>
+        <tbody id="data-hasil"><tr><td colspan="5">Belum ada hasil.</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>Perbandingan hasil</h2>
+    <p id="perbandingan">Menunggu hasil dari backend.</p>
+    <details>
+      <summary>Penjelasan metode</summary>
+      <p>Sorting menyusun data berdasarkan harga agar lebih mudah dibandingkan. Ascending mengurutkan harga dari kecil ke besar, sedangkan descending dari besar ke kecil.</p>
+      <p><code>sorted</code> memakai Ordering berdasarkan harga. <code>sortBy</code> menerima fungsi pengambil harga (higher-order function). <code>sortWith</code> menerima fungsi pembanding yang menghasilkan Boolean (predicate).</p>
+      <p>Recursive Insertion Sort mengurutkan tail secara rekursif, lalu menyisipkan head ke posisi yang sesuai. List kosong menjadi base case. Algoritma ini tidak memakai method sorting bawaan.</p>
+      <p>Semua metode menghasilkan List baru sehingga List awal tetap sama (immutable). Pada dataset ini, hasil rekursif dibandingkan dengan setiap method bawaan di backend.</p>
+    </details>
+  </main>
+  <script src="/main.js"></script>
+</body>
+</html>
